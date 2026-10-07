@@ -21,8 +21,8 @@ export function generate(kind: WorkloadKind, length: number, range: number): num
     for (let i = 0; i < length; i++) out.push(i % k);
   } else if (kind === "Random") for (let i = 0; i < length; i++) out.push(rnd(R));
   else if (kind === "Locality") {
-    const hot = Array.from({ length: Math.max(1, Math.min(3, R)) }, () => rnd(R));
-    for (let i = 0; i < length; i++) out.push(Math.random() < 0.8 ? hot[rnd(hot.length)]! : rnd(R));
+    const hot: number[] = Array.from({ length: Math.max(1, Math.min(3, R)) }, () => rnd(R));
+    for (let i = 0; i < length; i++) out.push(Math.random() < 0.8 ? (hot[rnd(hot.length)] ?? 0) : rnd(R));
   } else {
     let i = 0;
     while (out.length < length) {

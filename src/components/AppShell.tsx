@@ -45,8 +45,9 @@ export function AppShell() {
               to={to}
               onClick={() => setOpen(false)}
               activeOptions={{ exact: to === "/" }}
-              className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-sidebar-foreground transition-colors hover:bg-sidebar-accent"
-              activeProps={{ className: "bg-primary text-primary-foreground hover:bg-primary font-semibold shadow-sm" }}
+              className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors"
+              activeProps={{ className: "bg-primary text-primary-foreground font-semibold shadow-sm" }}
+              inactiveProps={{ className: "text-sidebar-foreground hover:bg-sidebar-accent" }}
             >
               <Icon className="h-4 w-4" />
               {label}
