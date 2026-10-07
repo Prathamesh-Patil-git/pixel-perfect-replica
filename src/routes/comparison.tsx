@@ -1,5 +1,4 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo } from "react";
 import { PageHeader, Panel, Btn, pct } from "@/components/ui-kit";
 import { SimpleBar } from "@/components/Charts";
 import { useSim } from "@/lib/sim/store";
@@ -23,7 +22,7 @@ function Comparison() {
   const s = useSim();
   if (!s.ready) return null;
   const parsed = parseRefs(s.refText);
-  const results = useMemo(() => (parsed.ok ? POLICIES.map((p) => simulate(p, parsed.refs, s.frames)) : []), [s.refText, s.frames]);
+  const results = parsed.ok ? POLICIES.map((p) => simulate(p, parsed.refs, s.frames)) : [];
   if (!parsed.ok || !results.length)
     return (
       <>
