@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 - Simulation logic lives in pure TS under src/lib/sim (algorithms, workload, validation) with vitest tests; UI only calls it — keeps algorithms testable.
 - Theme uses a `.dark` class on <html> set by an inline head script from localStorage; all colors are tokens in src/styles.css — avoids flash and hardcoded colors.
+- Hosting target is Vercel: nitro (already a dependency) auto-detects Vercel at build time, so no preset is pinned in vite.config.ts — keeps Lovable builds on their default target.
