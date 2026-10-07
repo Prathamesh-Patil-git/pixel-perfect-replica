@@ -43,10 +43,10 @@ function Dashboard() {
         </Panel>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <Stat label="Last workload" value={workloadName} hint={`${last[0].refs.length} references, ${last[0].frames} frames`} />
+          <Stat label="Last workload" value={workloadName} hint={`${last[0]!.refs.length} references, ${last[0]!.frames} frames`} />
           <Stat label="Best policy" value={best ? POLICY_LABEL[best.policy] : "—"} hint="Excluding Optimal" />
-          <Stat label="Page faults" value={best?.faults ?? last[0].faults} />
-          <Stat label="Hit ratio" value={pct(best?.hitRatio ?? last[0].hitRatio)} />
+          <Stat label="Page faults" value={best?.faults ?? last[0]!.faults} />
+          <Stat label="Hit ratio" value={pct(best?.hitRatio ?? last[0]!.hitRatio)} />
         </div>
       )}
     </>

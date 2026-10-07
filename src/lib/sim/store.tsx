@@ -18,6 +18,7 @@ interface Store {
   setWorkloadName: (s: string) => void;
   last: SimResult[];
   setLast: (r: SimResult[]) => void;
+  ready: boolean;
   experiments: Experiment[];
   setExperiments: (e: Experiment[] | ((p: Experiment[]) => Experiment[])) => void;
 }
@@ -54,7 +55,7 @@ export function SimProvider({ children }: { children: ReactNode }) {
   }, [loaded, refText, frames, workloadName, experiments, last]);
 
   return (
-    <Ctx.Provider value={{ refText, setRefText, frames, setFrames, workloadName, setWorkloadName, last, setLast, experiments, setExperiments }}>
+    <Ctx.Provider value={{ refText, setRefText, frames, setFrames, workloadName, setWorkloadName, last, setLast, ready: loaded, experiments, setExperiments }}>
       {children}
     </Ctx.Provider>
   );

@@ -19,6 +19,7 @@ export const Route = createFileRoute("/analysis")({
 
 function Analysis() {
   const s = useSim();
+  if (!s.ready) return null;
   const p = parseRefs(s.refText);
   if (!p.ok)
     return (

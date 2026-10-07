@@ -21,6 +21,7 @@ export const Route = createFileRoute("/comparison")({
 
 function Comparison() {
   const s = useSim();
+  if (!s.ready) return null;
   const parsed = parseRefs(s.refText);
   const results = useMemo(() => (parsed.ok ? POLICIES.map((p) => simulate(p, parsed.refs, s.frames)) : []), [s.refText, s.frames]);
   if (!parsed.ok || !results.length)
