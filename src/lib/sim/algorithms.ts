@@ -98,7 +98,7 @@ function run(refs: number[], n: number, victim: Victim, policy: Policy): SimResu
     } else {
       const v = victim({ frames, i, refs, loadedAt, lastUsed });
       slot = v.slot;
-      replaced = frames[slot];
+      replaced = frames[slot] ?? null;
       loadedAt.delete(replaced!);
       lastUsed.delete(replaced!);
       decision = `Fault: replaced page ${replaced} because ${v.why}`;
