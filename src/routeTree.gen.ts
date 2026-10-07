@@ -10,33 +10,115 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AnalysisRouteImport } from './routes/analysis'
+import { Route as ComparisonRouteImport } from './routes/comparison'
+import { Route as ExperimentsRouteImport } from './routes/experiments'
+import { Route as SimulatorRouteImport } from './routes/simulator'
+import { Route as WorkloadLabRouteImport } from './routes/workload-lab'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AnalysisRoute = AnalysisRouteImport.update({
+  id: '/analysis',
+  path: '/analysis',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComparisonRoute = ComparisonRouteImport.update({
+  id: '/comparison',
+  path: '/comparison',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ExperimentsRoute = ExperimentsRouteImport.update({
+  id: '/experiments',
+  path: '/experiments',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SimulatorRoute = SimulatorRouteImport.update({
+  id: '/simulator',
+  path: '/simulator',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WorkloadLabRoute = WorkloadLabRouteImport.update({
+  id: '/workload-lab',
+  path: '/workload-lab',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/analysis': typeof AnalysisRoute
+  '/comparison': typeof ComparisonRoute
+  '/experiments': typeof ExperimentsRoute
+  '/simulator': typeof SimulatorRoute
+  '/workload-lab': typeof WorkloadLabRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/analysis': typeof AnalysisRoute
+  '/comparison': typeof ComparisonRoute
+  '/experiments': typeof ExperimentsRoute
+  '/simulator': typeof SimulatorRoute
+  '/workload-lab': typeof WorkloadLabRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/analysis': typeof AnalysisRoute
+  '/comparison': typeof ComparisonRoute
+  '/experiments': typeof ExperimentsRoute
+  '/simulator': typeof SimulatorRoute
+  '/workload-lab': typeof WorkloadLabRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/analysis'
+    | '/comparison'
+    | '/experiments'
+    | '/simulator'
+    | '/workload-lab'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/about'
+    | '/analysis'
+    | '/comparison'
+    | '/experiments'
+    | '/simulator'
+    | '/workload-lab'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/analysis'
+    | '/comparison'
+    | '/experiments'
+    | '/simulator'
+    | '/workload-lab'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  AnalysisRoute: typeof AnalysisRoute
+  ComparisonRoute: typeof ComparisonRoute
+  ExperimentsRoute: typeof ExperimentsRoute
+  SimulatorRoute: typeof SimulatorRoute
+  WorkloadLabRoute: typeof WorkloadLabRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +130,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/analysis': {
+      id: '/analysis'
+      path: '/analysis'
+      fullPath: '/analysis'
+      preLoaderRoute: typeof AnalysisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/comparison': {
+      id: '/comparison'
+      path: '/comparison'
+      fullPath: '/comparison'
+      preLoaderRoute: typeof ComparisonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/experiments': {
+      id: '/experiments'
+      path: '/experiments'
+      fullPath: '/experiments'
+      preLoaderRoute: typeof ExperimentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/simulator': {
+      id: '/simulator'
+      path: '/simulator'
+      fullPath: '/simulator'
+      preLoaderRoute: typeof SimulatorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/workload-lab': {
+      id: '/workload-lab'
+      path: '/workload-lab'
+      fullPath: '/workload-lab'
+      preLoaderRoute: typeof WorkloadLabRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  AnalysisRoute: AnalysisRoute,
+  ComparisonRoute: ComparisonRoute,
+  ExperimentsRoute: ExperimentsRoute,
+  SimulatorRoute: SimulatorRoute,
+  WorkloadLabRoute: WorkloadLabRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
