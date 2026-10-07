@@ -1,3 +1,4 @@
+import { FlaskConical } from "lucide-react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { PageHeader, Panel, Btn, inputCls } from "@/components/ui-kit";
@@ -32,7 +33,7 @@ function Lab() {
 
   return (
     <>
-      <PageHeader title="Workload Lab" description="Generate reference strings with different access patterns and send them to the simulator." />
+      <PageHeader eyebrow="Generators" icon={FlaskConical} title="Workload Lab" description="Generate reference strings with different access patterns and send them to the simulator." />
       <Panel title="Controls" className="mb-6">
         <div className="grid gap-4 sm:grid-cols-3">
           <label className="text-sm font-medium">Length<input type="number" min={1} max={5000} className={`${inputCls} mt-1 font-mono`} value={length} onChange={(e) => setLength(Math.max(1, Math.min(5000, Number(e.target.value) || 1)))} /></label>

@@ -1,3 +1,4 @@
+import { ScanSearch } from "lucide-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHeader, Panel, Stat, pct } from "@/components/ui-kit";
 import { SimpleBar } from "@/components/Charts";
@@ -24,7 +25,7 @@ function Analysis() {
   if (!p.ok)
     return (
       <>
-        <PageHeader title="Workload Analysis" description="Features extracted from the current reference string." />
+        <PageHeader eyebrow="Insights" icon={ScanSearch} title="Workload Analysis" description="Features extracted from the current reference string." />
         <Panel><p className="text-muted-foreground">{p.error}</p></Panel>
       </>
     );
@@ -32,7 +33,7 @@ function Analysis() {
   const c = classify(f);
   return (
     <>
-      <PageHeader title="Workload Analysis" description={`Analysing ${f.length} references (${s.workloadName}).`} />
+      <PageHeader eyebrow="Insights" icon={ScanSearch} title="Workload Analysis" description={`Analysing ${f.length} references (${s.workloadName}).`} />
       <div className="mb-6 grid grid-cols-2 gap-4 md:grid-cols-4">
         <Stat label="Repetition" value={pct(f.repetition)} />
         <Stat label="Locality" value={pct(f.locality)} hint={`Reuse within ${Math.max(2, s.frames * 2)} steps`} />

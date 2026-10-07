@@ -1,3 +1,4 @@
+import { BarChart3 } from "lucide-react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHeader, Panel, Btn, pct } from "@/components/ui-kit";
 import { SimpleBar } from "@/components/Charts";
@@ -26,7 +27,7 @@ function Comparison() {
   if (!parsed.ok || !results.length)
     return (
       <>
-        <PageHeader title="Algorithm Comparison" description="All four policies on the current reference string." />
+        <PageHeader eyebrow="Benchmark" icon={BarChart3} title="Algorithm Comparison" description="All four policies on the current reference string." />
         <Panel><p className="mb-3 text-muted-foreground">The current reference string is invalid: {!parsed.ok && parsed.error}</p><Link to="/simulator"><Btn>Fix in Simulator</Btn></Link></Panel>
       </>
     );
@@ -38,7 +39,7 @@ function Comparison() {
 
   return (
     <>
-      <PageHeader title="Algorithm Comparison" description={`${parsed.refs.length} references · ${s.frames} frames · workload: ${s.workloadName}`}>
+      <PageHeader eyebrow="Benchmark" icon={BarChart3} title="Algorithm Comparison" description={`${parsed.refs.length} references · ${s.frames} frames · workload: ${s.workloadName}`}>
         <Btn variant="primary" onClick={() => s.setLast(results)}>Open in Simulator view</Btn>
       </PageHeader>
       <div className="mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">

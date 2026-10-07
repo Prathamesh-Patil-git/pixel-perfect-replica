@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { Play, Pause, SkipBack, SkipForward, RotateCcw } from "lucide-react";
+import { Play, Pause, SkipBack, SkipForward, RotateCcw, Cpu, SlidersHorizontal, MonitorPlay, Table2, AlertTriangle, CheckCircle2, Target, Percent, ListOrdered, Timer, Check } from "lucide-react";
 import { PageHeader, Panel, Stat, Btn, pct, inputCls } from "@/components/ui-kit";
 import { useSim } from "@/lib/sim/store";
 import { POLICIES, POLICY_LABEL, type Policy, type SimResult } from "@/lib/sim/algorithms";
@@ -71,9 +71,9 @@ function SimulatorPage() {
 
   return (
     <>
-      <PageHeader title="Simulator" description="Enter a reference string, choose frames and a policy, then replay every decision." />
+      <PageHeader eyebrow="Step-by-step" icon={Cpu} title="Simulator" description="Enter a reference string, choose frames and a policy, then replay every decision." />
       <div className="grid gap-6 lg:grid-cols-[340px_1fr]">
-        <Panel title="Input" className="h-fit">
+        <Panel title="Input" subtitle="Configure your run" icon={SlidersHorizontal} className="h-fit lg:sticky lg:top-6">
           <label className="mb-1 block text-sm font-medium">Reference string</label>
           <textarea rows={4} className={`${inputCls} font-mono`} value={s.refText} onChange={(e) => { s.setRefText(e.target.value); s.setWorkloadName("Manual"); }} placeholder="e.g. 7 0 1 2 0 3" />
           <p className="mb-4 mt-1 text-xs text-muted-foreground">Separate pages with spaces, commas or tabs.</p>
@@ -82,8 +82,10 @@ function SimulatorPage() {
           <label className="mb-1 block text-sm font-medium">Algorithm</label>
           <div className="mb-4 grid grid-cols-2 gap-2">
             {POLICIES.map((p) => (
-              <button key={p} onClick={() => setPolicy(p)} className={`${policy === p ? "clay-btn-primary" : "clay-btn"} px-3 py-2 text-sm`}>
-                {POLICY_LABEL[p]}
+              <button key={p} onClick={() => setPolicy(p)} className={`relative rounded-xl border-2 p-3 text-left transition-colors ${policy === p ? "border-primary bg-secondary" : "border-border bg-card hover:bg-muted"}`}>
+                {policy === p && <Check className="absolute right-2 top-2 h-4 w-4 text-primary" />}
+                <div className="text-sm font-semibold">{POLICY_LABEL[p]}</div>
+                <div className="text-[11px] text-muted-foreground">{{ FIFO: "Oldest out", LRU: "Least recent out", OPT: "Future-aware", ADAPTIVE: "Auto-select" }[p]}</div>
               </button>
             ))}
           </div>
@@ -97,7 +99,7 @@ function SimulatorPage() {
 
         <div className="min-w-0 space-y-6">
           {!result ? (
-            <Panel><p className="text-muted-foreground">Run a simulation to see frames, decisions and metrics.</p></Panel>
+            <Panel title="Playback" icon={MonitorPlay}><p className="py-10 text-center text-muted-foreground">Run a simulation to see frames, decisions and metrics.</p></Panel>
           ) : (
             <>
               {s.last.length > 1 && (
@@ -109,7 +111,7 @@ function SimulatorPage() {
                   ))}
                 </div>
               )}
-              <Panel title={`${POLICY_LABEL[result.policy]} — step ${step + 1} of ${steps.length}`}>
+              <Panel icon={MonitorPlay} title={POLICY_LABEL[result.policy]} subtitle={`Step ${step + 1} of ${steps.length}`} action={<div className="flex gap-3 text-xs"><span className="flex items-center gap-1"><span className="h-3 w-3 rounded border-2 border-success bg-success-soft" />Hit</span><span className="flex items-center gap-1"><span className="h-3 w-3 rounded border-2 border-destructive bg-fault-soft" />Fault</span></div>}>
                 {result.adaptiveNote && <p className="mb-3 rounded-lg bg-accent p-3 text-sm text-accent-foreground">{result.adaptiveNote}</p>}
                 {cur && (
                   <>
@@ -130,7 +132,7 @@ function SimulatorPage() {
                         );
                       })}
                     </div>
-                    <p className="mb-4 text-sm">{cur.decision}</p>
+                    <p className="mb-4 rounded-xl border border-border bg-muted/50 p-3 text-sm">{cur.decision}</p>
                   </>
                 )}
                 <div className="flex flex-wrap items-center gap-2">
@@ -150,15 +152,15 @@ function SimulatorPage() {
               </Panel>
 
               <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
-                <Stat label="Page faults" value={result.faults} />
-                <Stat label="Hits" value={result.hits} />
-                <Stat label="Hit ratio" value={pct(result.hitRatio)} />
-                <Stat label="Fault rate" value={pct(result.faultRate)} />
-                <Stat label="References" value={result.refs.length} />
-                <Stat label="Execution time" value={`${result.timeMs.toFixed(2)} ms`} />
+                <Stat icon={AlertTriangle} tone="danger" label="Page faults" value={result.faults} />
+                <Stat icon={CheckCircle2} tone="success" label="Hits" value={result.hits} />
+                <Stat icon={Target} tone="accent" label="Hit ratio" value={pct(result.hitRatio)} />
+                <Stat icon={Percent} tone="warning" label="Fault rate" value={pct(result.faultRate)} />
+                <Stat icon={ListOrdered} label="References" value={result.refs.length} />
+                <Stat icon={Timer} label="Execution time" value={`${result.timeMs.toFixed(2)} ms`} />
               </div>
 
-              <Panel title="Step-by-step table">
+              <Panel title="Step-by-step table" subtitle="Click a row to jump to it" icon={Table2}>
                 {steps.length === 0 ? (
                   <p className="text-sm text-muted-foreground">Step details were not saved for this large run. Run it again to view them.</p>
                 ) : (
