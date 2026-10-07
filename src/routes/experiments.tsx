@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { Trash2 } from "lucide-react";
+import { Trash2, Beaker } from "lucide-react";
 import { PageHeader, Panel, Btn, pct, inputCls } from "@/components/ui-kit";
 import { GroupedBar } from "@/components/Charts";
 import { useSim } from "@/lib/sim/store";
@@ -49,7 +49,7 @@ function Experiments() {
 
   return (
     <>
-      <PageHeader title="Experiments" description="Queue several workloads, run all four policies on each and compare.">
+      <PageHeader eyebrow="Batch runs" icon={Beaker} title="Experiments" description="Queue several workloads, run all four policies on each and compare.">
         <div className="flex gap-2">
           <Btn variant="primary" disabled={!s.experiments.length} onClick={runAll}>Run all</Btn>
           <Btn disabled={!s.experiments.length} onClick={() => s.setExperiments([])}>Clear history</Btn>

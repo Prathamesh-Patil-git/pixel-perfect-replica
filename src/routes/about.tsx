@@ -1,3 +1,4 @@
+import { Info } from "lucide-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHeader, Panel } from "@/components/ui-kit";
 
@@ -34,7 +35,7 @@ const ALGOS = [
 function About() {
   return (
     <>
-      <PageHeader title="About this project" description="An educational simulator for operating system page replacement policies." />
+      <PageHeader eyebrow="Learn" icon={Info} title="About this project" description="An educational simulator for operating system page replacement policies." />
       <div className="grid gap-6 lg:grid-cols-2">
         <Panel title="Terminology">
           <dl className="space-y-3">{TERMS.map(([t, d]) => <div key={t}><dt className="font-semibold">{t}</dt><dd className="text-sm text-muted-foreground">{d}</dd></div>)}</dl>
