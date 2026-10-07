@@ -52,7 +52,7 @@ export function analyze(refs: number[], frames = 3): Features {
   const n = refs.length;
   const unique = new Set(refs).size;
   let seq = 0;
-  for (let i = 1; i < n; i++) if (refs[i] === refs[i - 1] + 1) seq++;
+  for (let i = 1; i < n; i++) if (refs[i] === refs[i - 1]! + 1) seq++;
   const last = new Map<number, number>();
   let reuseSum = 0,
     reuseCount = 0,

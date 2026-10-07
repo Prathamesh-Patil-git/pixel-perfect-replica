@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+- Simulation logic lives in pure TS under src/lib/sim (algorithms, workload, validation) with vitest tests; UI only calls it — keeps algorithms testable.
+- Theme uses a `.dark` class on <html> set by an inline head script from localStorage; all colors are tokens in src/styles.css — avoids flash and hardcoded colors.
